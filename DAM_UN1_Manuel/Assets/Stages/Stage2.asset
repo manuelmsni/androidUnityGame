@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dae3b2462c480fe45875eb082b81ca4f, type: 3}
-  m_Name: Stage0
+  m_Name: Stage2
   m_EditorClassIdentifier: 
-  colorFondoStage: {r: 0.17475079, g: 0.7264151, b: 0.5859098, a: 1}
-  colorParteNivelStage: {r: 1, g: 1, b: 1, a: 1}
-  colorBolaStage: {r: 1, g: 1, b: 1, a: 1}
+  colorFondoStage: {r: 0.2950338, g: 0.6493088, b: 0.735849, a: 1}
+  colorParteNivelStage: {r: 0.27033645, g: 0.7882353, b: 0.764151, a: 1}
+  colorBolaStage: {r: 0, g: 0, b: 0, a: 1}
   niveles:
   - numeroPartesVisibles: 11
     numeroDeathPart: 1
