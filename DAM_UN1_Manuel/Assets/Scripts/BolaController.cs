@@ -27,7 +27,7 @@ public class BolaController : MonoBehaviour
     public float superVelocidad = 8;
 
     //Declaramos una variable para saber si estamos en esa super velocidad o no
-    private bool esSuperVelocidad;
+    private bool esSuperVelocidad=false;
 
     //Declaramos una variable para saber a partir de qué número de pasos de discos perfectos activamos la super velocidad
     public int numeroPasosPerfectos = 3;
@@ -48,6 +48,7 @@ public class BolaController : MonoBehaviour
         //En el momento que bote una vez, salimos del método
         if (ignorarSiguienteColision)
         {
+			UnityEngine.Debug.Log("5555555555");
             return;
         }
 
@@ -55,6 +56,7 @@ public class BolaController : MonoBehaviour
         //y con lo que nos hemos chocado no es nuestro disco de Goal (el último disco)
         if (esSuperVelocidad && !colision.transform.GetComponent<GoalController>())
         {
+			UnityEngine.Debug.Log("666666666666");
             //si entra es que estamos en super velocidad y hemos chocado con un disco de por medio
             //destruimos el disco entero (nosotros chocamos con los quesitos así que tenemos que destruir el padre)
             //y ponemos que se destruya en 0.2 segundos
@@ -62,6 +64,7 @@ public class BolaController : MonoBehaviour
         }
         else
         {
+			UnityEngine.Debug.Log("7777777777777777");
             //Vamos a crear un objeto DeathPart que sólo se va a asignar si la bola choca con un quesito rojo
             //es decir, si choca con un componente de tipo DeathPart
             DeathPart deathpart = colision.transform.GetComponent<DeathPart>();
@@ -69,6 +72,7 @@ public class BolaController : MonoBehaviour
             //Si chocamos con un quesito rojo
             if (deathpart)
             {
+				UnityEngine.Debug.Log("888888888888888888");
                 //reseteamos el nivel
                 GameManager.singleton.RestartNivel();
             }
@@ -89,37 +93,46 @@ public class BolaController : MonoBehaviour
         //LLamamos al método de permitirSiguienteColision() para que vuelva a botar la bola pasados 0.2 ms
         Invoke("PermitirSiguienteColision", 0.2f);
 
-        //Si choco con algo tenemos que poner el número de pasos perfectos a cero y la super velocidad a false
-        numeroPasosPerfectos = 0;
-        esSuperVelocidad = false;
+        
+		//Si choco con algo tenemos que poner el número de pasos perfectos a cero y la super velocidad a false
+        //  numeroPasosPerfectos = 0;
+        // esSuperVelocidad = false;
 
     }
 
     //Utilizamos el método Update para activar la super velocidad en caso de que pasemos más de dos discos perfectos
     private void Update()
     {
-        if (pasosPerfectos >= numeroPasosPerfectos && !esSuperVelocidad)
+        if (pasosPerfectos >= numeroPasosPerfectos)
         {
-            //si el número de pasos perfectos que hemos hecho es mayor o igual que el que hemos establecido
-            //y no estamos en super velocidad, la activamos
-            esSuperVelocidad = true;
+			if(!esSuperVelocidad){
+				UnityEngine.Debug.Log("1111111");
+				//si el número de pasos perfectos que hemos hecho es mayor o igual que el que hemos establecido
+				//y no estamos en super velocidad, la activamos
+				esSuperVelocidad = true;
 
-            //y le sumamos a la velocidad actual, el extra que queremos para que tenga super velocidad
-            //almacenado en la variable float superVelocidad
-            //es decir, cuando vaya hacia abajo, poenmos el impulso del rigidBody a esa cantidad
-            rb.AddForce(Vector3.down * superVelocidad, ForceMode.Impulse);
-        }
+				//y le sumamos a la velocidad actual, el extra que queremos para que tenga super velocidad
+				//almacenado en la variable float superVelocidad
+				//es decir, cuando vaya hacia abajo, poenmos el impulso del rigidBody a esa cantidad
+				rb.AddForce(Vector3.down * superVelocidad, ForceMode.Impulse);
+			}
+        }else {
+			if(esSuperVelocidad) esSuperVelocidad = false;
+			UnityEngine.Debug.Log("2222222222222");
+		}
     }
 
     //Para controlar que pueda volver a botar pasados unos cuantos segundos
     private void PermitirSiguienteColision()
     {
+		UnityEngine.Debug.Log("33333333333333333");
         ignorarSiguienteColision = false;
     }
 
     //Creamos un método para resetear la bola y que vuelva a la posición inicial
     public void ResetBola()
     {
+		UnityEngine.Debug.Log("4444444444444444");
         transform.position = posicionInicial;
     }
 }
